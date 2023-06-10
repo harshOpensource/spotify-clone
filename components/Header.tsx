@@ -6,7 +6,12 @@ import { twMerge } from "tailwind-merge";
 import { RxCaretLeft, RxCaretRight } from "react-icons/rx";
 import { HiHome } from "react-icons/hi";
 import { BiSearch } from "react-icons/bi";
+import { FaUserAlt } from "react-icons/fa";
 import Button from "./Button";
+import useAuthModal from "@/hooks/useAuthModal";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useUser } from "@/hooks/useUser";
+import { toast } from "react-hot-toast";
 
 interface Props {
   children: React.ReactNode;
@@ -16,7 +21,27 @@ interface Props {
 function Header({ children, className }: Props) {
   const router = useRouter();
 
-  const handleLogout = () => {};
+  const { onClose, onOpen } = useAuthModal();
+
+  const supabaseClient = useSupabaseClient();
+
+  const { user } = useUser();
+
+  const handleLogout = async () => {
+    const { error } = await supabaseClient.auth.signOut();
+
+    //reset any playing song in future
+
+    router.refresh();
+    router.push("/");
+
+    if (error) {
+      console.log(error);
+      toast.error(error.message);
+    } else {
+      toast.success("Logged out successfully!");
+    }
+  };
 
   return (
     <div
@@ -50,25 +75,39 @@ function Header({ children, className }: Props) {
         </div>
         {/*  */}
         <div className="flex justify-between items-center gap-x-4">
-          <>
-            <div>
+          {user ? (
+            <div className="flex gap-x-4 items-center">
               <Button
-                className="font-medium text-neutral-300 bg-transparent"
-                onClick={() => {}}
+                onClick={handleLogout}
+                className="bg-white font-semibold px-6 py-2"
               >
-                Sign Up
+                Logout
+              </Button>
+              <Button onClick={() => router.push("/account")}>
+                <FaUserAlt />
               </Button>
             </div>
+          ) : (
+            <>
+              <div>
+                <Button
+                  className="font-medium text-neutral-300 bg-transparent"
+                  onClick={onOpen}
+                >
+                  Sign Up
+                </Button>
+              </div>
 
-            <div>
-              <Button
-                className="bg-white px-6 py-2 font-medium"
-                onClick={() => {}}
-              >
-                Log In
-              </Button>
-            </div>
-          </>
+              <div>
+                <Button
+                  className="bg-white px-6 py-2 font-medium"
+                  onClick={onOpen}
+                >
+                  Log In
+                </Button>
+              </div>
+            </>
+          )}
         </div>
         {/*  */}
       </div>
