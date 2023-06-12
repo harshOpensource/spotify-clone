@@ -1,3 +1,5 @@
+"use client";
+
 import { FaPlay } from "react-icons/fa";
 
 const PlayButton = () => {

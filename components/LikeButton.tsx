@@ -26,8 +26,7 @@ function LikeButton({ songId }: Props) {
         .from("liked_songs")
         .delete()
         .eq("user_id", user.id)
-        .eq("song_id", songId)
-        .single();
+        .eq("song_id", songId);
 
       if (error) {
         toast.error(error.message);
@@ -63,7 +62,7 @@ function LikeButton({ songId }: Props) {
       return;
     }
 
-    const fetchLikedSongs = async () => {
+    const fetchData = async () => {
       const { data, error } = await supabaseClient
         .from("liked_songs")
         .select("*")
@@ -74,11 +73,10 @@ function LikeButton({ songId }: Props) {
       if (!error && data) {
         setIsLiked(true);
       }
-      {
-      }
-      fetchLikedSongs();
     };
-  }, [songId, user?.id, supabaseClient]);
+
+    fetchData();
+  }, [songId, supabaseClient, user?.id]);
 
   const Icon = isLiked ? AiFillHeart : AiOutlineHeart;
 
