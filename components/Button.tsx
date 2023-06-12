@@ -6,7 +6,7 @@ interface Props {
   className?: string;
   disabled?: boolean;
   type?: any;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 function Button({ children, className, disabled, type, onClick }: Props) {

@@ -14,7 +14,7 @@ import { useUser } from "@/hooks/useUser";
 import { toast } from "react-hot-toast";
 
 interface Props {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   className?: string;
 }
 
