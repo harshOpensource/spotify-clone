@@ -7,7 +7,7 @@ import React from "react";
 
 interface Props {
   song: Song;
-  onClick: (id: string) => void;
+  onClick?: (id: string) => void;
 }
 
 function MediaItem({ song, onClick }: Props) {

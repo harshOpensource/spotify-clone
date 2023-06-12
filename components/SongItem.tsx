@@ -5,6 +5,7 @@ import { Song } from "@/types";
 import Image from "next/image";
 import React from "react";
 import PlayButton from "./PlayButton";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 interface Props {
   song: Song;
@@ -13,9 +14,11 @@ interface Props {
 
 function SongItem({ song, onClick }: Props) {
   const imagePath = useLoadImage(song);
+  if (!onClick) return;
+
   return (
     <div
-      onClick={() => {}}
+      onClick={() => onClick(song.id)}
       className="relative group flex flex-col items-center justify-center rounded-md overflow-hidden gap-x-4 bg-neutral-400/5 cursor-pointer transition p-3 hover:bg-neutral-400/10"
     >
       <div className="relative aspect-square w-full h-full rounded-md overflow-hidden">
@@ -38,7 +41,11 @@ function SongItem({ song, onClick }: Props) {
           "
         >
           By {song.author}
-        </div>
+        </div>{" "}
+        {/* <span className="absolute flex h-5 w-5 animate-bounce items-center justify-center inset-0 m-auto z-10">
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-75"></span>
+          <span className="relative inline-flex h-3 w-3 rounded-full bg-sky-500"></span>
+        </span> */}
       </div>
       <div
         className="

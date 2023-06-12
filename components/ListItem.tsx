@@ -24,6 +24,7 @@ function ListItem({ image, href, name }: Props) {
       className=" relative group flex items-center rounded-md overflow-hidden gap-x-4 bg-neutral-100/10 cursor-pointer hover:bg-neutral-100/20 transition pr-4"
       onClick={onClick}
     >
+      {" "}
       <div className="relative min-h-[64px] min-w-[64px]">
         <Image src={liked} alt="liked song" className="object-cover" fill />
       </div>

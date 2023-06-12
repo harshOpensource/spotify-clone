@@ -9,6 +9,7 @@ import SidebarItem from "./SidebarItem";
 import { Icons } from "@/utils/Icons";
 import Library from "./Library";
 import { Song } from "@/types";
+import liked from "../public/liked.png";
 
 interface Props {
   children: React.ReactNode;
@@ -31,6 +32,11 @@ function Sidebar({ children, songs }: Props) {
         active: pathName === "/search",
         href: "/search",
         icon: BiSearch,
+      },
+      {
+        label: "Liked Songs",
+        active: pathName === "/liked",
+        href: "/liked",
       },
     ],
     [pathName]
