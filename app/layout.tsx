@@ -7,12 +7,21 @@ import ModalProvider from "@/providers/ModalProvider";
 import ToasterProvider from "@/providers/ToasterProvider";
 import getSongsByUserId from "@/actions/getSongsByUserId";
 import MediaPlayer from "@/components/MediaPlayer";
+import { Metadata } from "next";
 
 const font = Figtree({ subsets: ["latin"] });
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Spotify Clone",
   description: "Listen to the latest Music!",
+  icons: {
+    icon: [
+      {
+        url: "/spotify.svg",
+        href: "/spotify.svg",
+      },
+    ],
+  },
 };
 
 const revalidate = 0;
