@@ -1,4 +1,4 @@
-# Real-Time Messenger Built With Nextjs, Supabase, Typescript, React, and TailwindCss
+# Real-Time Music Spotify Player Built With Nextjs, Supabase, Typescript, React, and TailwindCss
 
 ![spotify](https://github.com/harshOpensource/spotify-clone/assets/135038577/c4c61320-514f-4f8a-82de-2c469d0cd0ea)
 
